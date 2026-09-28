@@ -56,13 +56,13 @@ The LED task handle is used to suspend and resume the LED Task:
     I also noticed that even when the LED stays ON or OFF when the task is suspended. It depends on the state it is at this exact moment.
 
 ### Screenshot 1 - Running
-![Running](running.png)
+![Running](images/running.png)
 
 ### Screenshot 2 - Suspended
-![Suspended](suspended.png)
+![Suspended](images/suspended.png)
 
 ### Screenshot 3 - Resumed
-![Resumed](resumed.png)
+![Resumed](images/resumed.png)
 
 ## State Analysis
 
