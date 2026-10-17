@@ -1,4 +1,4 @@
-Dear Professor [Last Name],
+Dear Osman,
 
 I hope you are doing well.
 
