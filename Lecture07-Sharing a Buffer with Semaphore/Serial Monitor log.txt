@@ -1,0 +1,13 @@
+passt das so? Consumer 1 read 4 (total=10)
+Consumer 0 read 0 (total=11)
+Consumer 1 read 1 (total=12)
+Consumer 0 read 2 (total=13)
+Consumer 1 read 3 (total=14)
+Consumer 0 read 4 (total=15)
+TOTAL=15 expected=15 invalid=0
+Value 0: count=3 expected=3
+Value 1: count=3 expected=3
+Value 2: count=3 expected=3
+Value 3: count=3 expected=3
+Value 4: count=3 expected=3
+PASS: total and all frequencies correct
