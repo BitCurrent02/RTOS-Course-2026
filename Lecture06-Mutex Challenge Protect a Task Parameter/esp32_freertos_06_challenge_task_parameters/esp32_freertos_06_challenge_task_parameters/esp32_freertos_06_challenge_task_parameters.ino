@@ -21,7 +21,7 @@
 #endif
 
 // Pins (change this if your Arduino board does not have LED_BUILTIN defined)
-static const int led_pin = LED_BUILTIN;
+static const int led_pin = 38;//LED_BUILTIN;
 // Globals
 static SemaphoreHandle_t mutex;
 //*****************************************************************************
@@ -36,22 +36,29 @@ void blinkLED(void *parameters) {
   // Copy the parameter into a local variable
   int num = *(int *)parameters;
 
-  // Give the mutex back after copying
-  xSemaphoreGive(mutex);
-
   // Print the parameter
   Serial.print("Received: ");
   Serial.println(num);
+  
+  // Give the mutex back after copying
+  xSemaphoreGive(mutex);
 
   // Configure the LED pin
   pinMode(led_pin, OUTPUT);
 
   // Blink forever and ever
-  while (1) {
+  /*while (1) {
     digitalWrite(led_pin, HIGH);
     vTaskDelay(num / portTICK_PERIOD_MS);
 
     digitalWrite(led_pin, LOW);
+    vTaskDelay(num / portTICK_PERIOD_MS);
+  } */
+  while (1) {
+    neopixelWrite(led_pin, 50, 0, 0);
+    vTaskDelay(num / portTICK_PERIOD_MS);
+
+    neopixelWrite(led_pin, 0, 0, 0);
     vTaskDelay(num / portTICK_PERIOD_MS);
   }
 }
@@ -92,12 +99,16 @@ void setup() {
   // Start task 1
   xTaskCreatePinnedToCore(blinkLED,
                           "Blink LED",
-                          1024,
+                          4096,
                           (void *)&delay_arg,
                           2,
                           NULL,
                           app_cpu);
 
+  // Wait until blinkLED has copied the parameter
+  xSemaphoreTake(mutex, portMAX_DELAY);
+  xSemaphoreGive(mutex);
+  
   // Show that we accomplished our task of passing the stack-based argument
   Serial.println("Done!");
 }
