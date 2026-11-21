@@ -6,6 +6,7 @@
 - Queue length: 4
 
 ### Serial output:
+```
 ESP-ROM:esp32s3-20210327
 Build:Mar 27 2021
 rst:0x1 (POWERON),boot:0x8 (SPI_FAST_FLASH_BOOT)
@@ -27,7 +28,7 @@ entry 0x403c98ac
 10
 11
 12
-
+```
 ## Run B
 - Timer interval: 100ms
 - Task delay: 500 ms
@@ -37,6 +38,7 @@ entry 0x403c98ac
 My prediction is that because we set the task delay to 500 ms, it works for the first 4 values but when the queue is full, it starts skipping numbers. That means there will be gaps in the output. During the 500 ms task delay, I expect five new numbers to arrive (500 ms / 100 ms = 5). The queue can hold only four numbers at a time, so I expect gaps in the output.
 
 ### Output 
+```
 1
 2
 3
@@ -49,6 +51,6 @@ My prediction is that because we set the task delay to 500 ms, it works for the 
 26
 31
 36
-
+```
 ### Results
 My prediction was partly correct. The gaps which I expected appeared, but later than I expected. The numbers 1-6 appeared in order and between 6 and 11 is the gap. That means when 7,8,9 and 10 arrived was the queue full and because of that these numbers were lost. The numbers 3 to 6 were already in the queue, so the task printed them in FIFO order before it printed 11.
