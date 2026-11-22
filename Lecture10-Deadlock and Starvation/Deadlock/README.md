@@ -53,3 +53,6 @@ It gives back the mutex and then tries again later.
 So that the other task can take it and finish its work and its round.
 #### What is the purpose of the random backoff?
 The purpose is that because of that random time it is less likely that both try again at the same time.
+
+## What I learned
+I learned that two tasks can deadlock when each holds a mutex that the other one needs. Code both mutexes in the same order prevented the deadlock. In the timeout test, Task_1 released mutex A so Task_2 could finish its round.

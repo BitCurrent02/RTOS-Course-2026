@@ -107,3 +107,7 @@ I think nothing will change because now the Blocked state is longer, but the Low
 
 #### Observation
 My prediction was wrong. Task_Low made much more progress during the BUSY period. With vTaskDelay(1), the progress was about +50, but with vTaskDelay(10), it increased to about +260 to +266. This happens probably because Task_Hog stays in the Blocked state longer, giving Task_Low more CPU time and it is also working the whole time.
+
+
+## What I learned
+In this assignment, I learned that high-priority tasks can prevent lower-priority tasks from running that so called starvation. I also deepend how usefull it is to use vTaskDelay() and that it allows other tasks to get CPU time and reduces starvation. A longer delay allowed Task_Low to make more progress.
