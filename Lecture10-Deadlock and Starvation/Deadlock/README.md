@@ -14,6 +14,7 @@ Using the same lock order prevents circular wait. A task waiting for the first m
 ### Step 1
 
 #### Output
+```
 === Demo 1: Deadlock | DEMO_MODE 0 ===
 [Task_1] taking A ...
 [Task_1] has A, now needs B
@@ -22,7 +23,7 @@ Using the same lock order prevents circular wait. A task waiting for the first m
 [HEARTBEAT] t=2 s | rounds: Task_1=0 Task_2=0
 [HEARTBEAT] t=3 s | rounds: Task_1=0 Task_2=0
 [HEARTBEAT] t=4 s | rounds: Task_1=0 Task_2=0
-
+```
 #### What happens to the worker tasks?
 In that case both of them are blocked. As we can see the Task_1 holds Mutex A and needs Mutex B. And Task_2 holds Mutex B and needs Mutex A. Each are waiting for the other Mutex.
 #### Which numbers in the HEARTBEAT line stop changing?
@@ -31,6 +32,7 @@ As we can see both rounds counter didn't change at all. But the t is still incre
 ### Step 2
 
 #### Output
+```
 === Demo 1: Deadlock | DEMO_MODE 0 ===
 [Task_1] taking A ...
 [Task_1] has A, now needs B
@@ -39,7 +41,7 @@ As we can see both rounds counter didn't change at all. But the t is still incre
 [Task_2] has A, now needs B
 [Task_1] taking A ...
 [Task_2] has BOTH locks -> work done (round 1)
-
+```
 #### Explanation
 It is working now because both tasks now take mutex A as first mutex and after that utex B. As we can see now while Task_2 waits for mutex A, it holds no mutex at all. Then Task_1 can also take mutex B and finishing its work and after that also releasing both mutexes again. Task_2 can then do the same.
 
